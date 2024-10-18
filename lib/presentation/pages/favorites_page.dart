@@ -44,7 +44,12 @@ class FavoritesPage extends StatelessWidget {
                       ),
                       title: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [Text(city.cityName), Text(weather.temp.toString())],
+                        children: [
+                          Text(city.cityName),
+                          Text(
+                            "${(weather.temp - 273.15).round()}℃",
+                          )
+                        ],
                       ),
                       subtitle: Text(weather.description.capitalizeFirstLetter()),
                       trailing: BlocBuilder<FavoritesCubit, List<ForecastEntity>>(

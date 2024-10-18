@@ -64,7 +64,7 @@ class FiveDayForecast extends StatelessWidget {
                     ],
                   ),
                   Text(
-                    "${weather.temp.round()} K",
+                    "${(weather.temp - 273.15).round()}℃",
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,

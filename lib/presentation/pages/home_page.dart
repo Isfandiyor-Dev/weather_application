@@ -105,7 +105,7 @@ class _HomePageState extends State<HomePage> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          "${dailyForecast[index].temp.round()}",
+                          "${(dailyForecast[index].temp - 273.15).round()} ℃",
                           style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.w500,

@@ -59,7 +59,7 @@ class MainContainer extends StatelessWidget {
                     },
                   ),
                   Text(
-                    "${weather.temp.round()} K",
+                    "${(weather.temp - 273.15).round()}℃",
                     style: const TextStyle(
                       fontSize: 35,
                       fontWeight: FontWeight.w700,

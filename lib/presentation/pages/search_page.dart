@@ -138,7 +138,13 @@ class _SearchPageState extends State<SearchPage> {
                               height: 45,
                             ),
                             title: Row(
-                              children: [Text(forecast.cityName), Text(weather.temp.toString())],
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(forecast.cityName),
+                                Text(
+                                  "${(weather.temp - 273.15).round()}℃",
+                                )
+                              ],
                             ),
                             subtitle: Text(weather.description.capitalizeFirstLetter()),
                             trailing: BlocBuilder<FavoritesCubit, List<ForecastEntity>>(
