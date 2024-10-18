@@ -16,8 +16,14 @@ class FavoritesCubit extends Cubit<List<ForecastEntity>> {
 
   void addFavorite(ForecastEntity city) async {
     var box = Hive.box<ForecastEntity>(_favoritesBox);
-    if (!box.values.contains(city)) {
-      await box.add(city);
+    if (!box.values.any((element) => element.cityName == city.cityName)) {
+      final newCity = ForecastEntity(
+        cityName: city.cityName,
+        lat: city.lat,
+        lon: city.lon,
+        list: List.from(city.list),
+      );
+      await box.add(newCity);
       emit(box.values.toList());
     }
   }

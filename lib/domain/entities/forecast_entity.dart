@@ -1,10 +1,11 @@
+import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
-import 'weather_entity.dart'; 
+import 'weather_entity.dart';
 
-part 'forecast_entity.g.dart'; 
+part 'forecast_entity.g.dart';
 
 @HiveType(typeId: 1)
-class ForecastEntity extends HiveObject {
+class ForecastEntity extends HiveObject with EquatableMixin {
   @HiveField(0)
   final String cityName;
 
@@ -24,17 +25,17 @@ class ForecastEntity extends HiveObject {
     required this.list,
   });
 
-  
+  @override
+  List<Object?> get props => [cityName, lat, lon, list];
+
   WeatherEntity getCurrentWeather() {
     final currentTime = DateTime.now();
-
     return list.firstWhere(
       (weather) => weather.dt.isAfter(currentTime),
       orElse: () => list.first,
     );
   }
 
-  
   List<WeatherEntity> getDailyForecast() {
     return list.take(8).toList();
   }
@@ -45,8 +46,6 @@ class ForecastEntity extends HiveObject {
 
     for (var element in list) {
       DateTime elementDate = DateTime(element.dt.year, element.dt.month, element.dt.day);
-
-      
       if (elementDate.isAfter(targetDt)) {
         days.add(element);
         targetDt = elementDate;

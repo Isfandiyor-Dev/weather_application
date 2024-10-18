@@ -1,9 +1,10 @@
+import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 
 part 'weather_entity.g.dart'; 
 
 @HiveType(typeId: 2)
-class WeatherEntity extends HiveObject {
+class WeatherEntity extends HiveObject with EquatableMixin {
   @HiveField(0)
   final DateTime dt;
 
@@ -38,4 +39,7 @@ class WeatherEntity extends HiveObject {
     required this.windSpeed,
     required this.visibility,
   });
+
+  @override
+  List<Object?> get props => [dt, temp, humidity, description, icon, cloudsAll, windSpeed, visibility];
 }
