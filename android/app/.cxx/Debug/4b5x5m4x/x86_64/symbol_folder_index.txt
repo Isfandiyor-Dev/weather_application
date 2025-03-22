@@ -1,0 +1,1 @@
+/home/isfandiyor/Документы/my_projects/weather_application/build/app/intermediates/cxx/Debug/4b5x5m4x/obj/x86_64

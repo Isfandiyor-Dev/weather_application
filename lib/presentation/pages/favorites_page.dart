@@ -28,10 +28,13 @@ class FavoritesPage extends StatelessWidget {
                 WeatherEntity weather = city.getCurrentWeather();
                 return GestureDetector(
                   onTap: () {
-                    context.read<WeatherCubit>().saveForecastToLocalStorage(city);
+                    context
+                        .read<WeatherCubit>()
+                        .saveForecastToLocalStorage(city);
                     Navigator.pushAndRemoveUntil(
                       context,
-                      MaterialPageRoute(builder: (context) => HomePage(forecastEntity: city)),
+                      MaterialPageRoute(
+                          builder: (context) => HomePage(forecastEntity: city)),
                       (Route<dynamic> route) => false,
                     );
                   },
@@ -51,20 +54,30 @@ class FavoritesPage extends StatelessWidget {
                           )
                         ],
                       ),
-                      subtitle: Text(weather.description.capitalizeFirstLetter()),
-                      trailing: BlocBuilder<FavoritesCubit, List<ForecastEntity>>(
+                      subtitle:
+                          Text(weather.description.capitalizeFirstLetter()),
+                      trailing:
+                          BlocBuilder<FavoritesCubit, List<ForecastEntity>>(
                         builder: (context, favorites) {
-                          bool isFavorite = favorites.contains(city);
+                          bool isFavorite = favorites.any((element) =>
+                              (element.lat == city.lat) &&
+                              (element.lon == city.lon));
                           return IconButton(
                             onPressed: () {
                               if (isFavorite) {
-                                context.read<FavoritesCubit>().removeFavorite(city);
+                                context
+                                    .read<FavoritesCubit>()
+                                    .removeFavorite(city);
                               } else {
-                                context.read<FavoritesCubit>().addFavorite(city);
+                                context
+                                    .read<FavoritesCubit>()
+                                    .addFavorite(city);
                               }
                             },
                             icon: Icon(
-                              isFavorite ? Icons.favorite : Icons.favorite_border,
+                              isFavorite
+                                  ? Icons.favorite
+                                  : Icons.favorite_border,
                               color: isFavorite ? Colors.red : null,
                             ),
                           );

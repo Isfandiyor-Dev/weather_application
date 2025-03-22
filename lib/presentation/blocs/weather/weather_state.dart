@@ -11,6 +11,12 @@ final class WeatherLoadedState extends WeatherState {
   WeatherLoadedState(this.forecastEntity);
 }
 
+final class WeatherLoadedSearchState extends WeatherState {
+  final ForecastEntity? searchForecast;
+  WeatherLoadedSearchState(this.searchForecast);
+}
+
+
 final class WeatherFailureState extends WeatherState {
   final String message;
 

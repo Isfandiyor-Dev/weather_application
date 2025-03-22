@@ -1,0 +1,2 @@
+/home/isfandiyor/Документы/my_projects/weather_application/android/app/.cxx/Debug/4b5x5m4x/armeabi-v7a/CMakeFiles/edit_cache.dir
+/home/isfandiyor/Документы/my_projects/weather_application/android/app/.cxx/Debug/4b5x5m4x/armeabi-v7a/CMakeFiles/rebuild_cache.dir

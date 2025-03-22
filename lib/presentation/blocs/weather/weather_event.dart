@@ -7,6 +7,11 @@ final class GetForecastByCityEvent extends WeatherEvent {
   GetForecastByCityEvent(this.city);
 }
 
+final class SearchForecastByCityEvent extends WeatherEvent {
+  final String searchCity;
+  SearchForecastByCityEvent(this.searchCity);
+}
+
 final class GetForecastByCoordEvent extends WeatherEvent {
   final double lat;
   final double lon;

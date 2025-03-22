@@ -26,8 +26,8 @@ class ForecastModel {
   factory ForecastModel.fromMap(Map<String, dynamic> map) {
     return ForecastModel(
       cityName: map["city"]['name'] as String,
-      lat: map["city"]["coord"]['lat'] as double,
-      lon: map["city"]["coord"]['lon'] as double,
+      lat: (map["city"]["coord"]['lat'] as num).toDouble(), // num -> double
+      lon: (map["city"]["coord"]['lon'] as num).toDouble(), // num -> double
       list: List<WeatherModel>.from(
         (map['list'] as List).map<WeatherModel>(
           (x) => WeatherModel.fromMap(x as Map<String, dynamic>),

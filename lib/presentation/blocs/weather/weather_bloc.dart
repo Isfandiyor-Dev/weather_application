@@ -13,6 +13,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
     this._getForecastByCoordUseCase,
   ) : super(WeatherInitialState()) {
     on<GetForecastByCityEvent>(_onGetForecastByCity);
+    on<SearchForecastByCityEvent>(_onSearchForecastByCity);
     on<GetForecastByCoordEvent>(_onGetForecastByCoord);
     on<ResetWeatherEvent>(_onResetWeather);
   }
@@ -23,6 +24,17 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
     try {
       final forecast = await _getForecastByCityUseCase(event.city);
       emit(WeatherLoadedState(forecast));
+    } catch (e) {
+      emit(WeatherFailureState(e.toString().capitalizeFirstLetter()));
+    }
+  }
+
+  void _onSearchForecastByCity(SearchForecastByCityEvent event, Emitter<WeatherState> emit) async {
+    emit(WeatherLoadingState());
+
+    try {
+      final forecast = await _getForecastByCityUseCase(event.searchCity);
+      emit(WeatherLoadedSearchState(forecast));
     } catch (e) {
       emit(WeatherFailureState(e.toString().capitalizeFirstLetter()));
     }

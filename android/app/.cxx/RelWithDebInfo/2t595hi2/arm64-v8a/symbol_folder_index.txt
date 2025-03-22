@@ -1,0 +1,1 @@
+/home/isfandiyor/Документы/my_projects/weather_application/build/app/intermediates/cxx/RelWithDebInfo/2t595hi2/obj/arm64-v8a

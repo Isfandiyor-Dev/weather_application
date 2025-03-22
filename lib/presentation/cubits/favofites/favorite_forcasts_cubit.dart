@@ -1,22 +1,27 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:weather_app/domain/entities/forecast_entity.dart';
 
 class FavoritesCubit extends Cubit<List<ForecastEntity>> {
-  FavoritesCubit() : super([]) {
-    _loadFavorites();
+  FavoritesCubit() : super(<ForecastEntity>[]) {
+    loadFavorites();
   }
 
   final String _favoritesBox = 'favoritesBox';
 
-  void _loadFavorites() {
+  void loadFavorites() {
     var box = Hive.box<ForecastEntity>(_favoritesBox);
     emit(box.values.toList());
   }
 
   void addFavorite(ForecastEntity city) async {
     var box = Hive.box<ForecastEntity>(_favoritesBox);
-    if (!box.values.any((element) => element.cityName == city.cityName)) {
+
+    if (!box.values.any(
+      (element) => (element.lat == city.lat) && (element.lon == city.lon),
+    )) {
       final newCity = ForecastEntity(
         cityName: city.cityName,
         lat: city.lat,
@@ -30,7 +35,7 @@ class FavoritesCubit extends Cubit<List<ForecastEntity>> {
 
   void removeFavorite(ForecastEntity city) async {
     var box = Hive.box<ForecastEntity>(_favoritesBox);
-    await box.deleteAt(box.values.toList().indexOf(city));
+    await city.delete();
     emit(box.values.toList());
   }
 }
